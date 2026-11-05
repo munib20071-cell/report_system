@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <title>تقديم بلاغ جديد - المؤسسة العامة للتدريب التقني والمهني</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #132238 100%);
+            --card-bg: rgba(19, 34, 56, 0.9);
+            --border-color: rgba(13, 148, 136, 0.3);
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --input-bg: #ffffff;
+            --input-text: #0f172a;
+            --guide-bg: rgba(13, 148, 136, 0.15);
+            --primary-color: #0d9488;
+        }
+        .light-theme {
+            --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #e2e8f0 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --border-color: rgba(13, 148, 136, 0.2);
+            --text-color: #0f172a;
+            --text-muted: #475569;
+            --input-bg: #f8fafc;
+            --input-text: #0f172a;
+            --guide-bg: rgba(204, 251, 241, 0.6);
+            --primary-color: #0f766e;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            margin: 0;
+            padding: 30px 15px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.4s ease;
+        }
+        .theme-toggle {
+            position: fixed; top: 20px; left: 20px; background: var(--primary-color);
+            color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; z-index: 1000;
+        }
+        .form-card {
+            max-width: 750px; width: 100%; margin: 0 auto; background: var(--card-bg);
+            backdrop-filter: blur(16px); border: 1px solid var(--border-color); border-radius: 20px; padding: 35px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3); box-sizing: border-box;
+        }
+        h2 { color: #0d9488; text-align: center; margin-top: 0; font-size: 22px; }
+        .guide-box {
+            background: var(--guide-bg); border-right: 4px solid var(--primary-color);
+            padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 13.5px; line-height: 1.6;
+        }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 14px; }
+        input, select, textarea {
+            width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid #475569;
+            background: var(--input-bg); color: var(--input-text); box-sizing: border-box; font-size: 14px; font-weight: 600;
+        }
+        select option { background: #ffffff; color: #0f172a; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        .btn-submit {
+            width: 100%; padding: 15px; background: linear-gradient(90deg, #0f766e, #0d9488);
+            color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer;
+        }
+        .error-banner { background: rgba(220, 38, 38, 0.2); border: 1px solid #ef4444; color: #fca5a5; padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-weight: bold; }
+
+        /* 🏛️ التذييل الكلاسيكي الفاخر والموحد */
+        footer {
+            margin: 40px auto 10px auto; padding: 25px 20px;
+            background: linear-gradient(145deg, #090d16, #111c2e); border-top: 2px solid #0d9488;
+            border-radius: 20px; text-align: center; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            width: 100%; max-width: 800px; box-sizing: border-box;
+        }
+        .footer-badge {
+            display: inline-block; background: rgba(13, 148, 136, 0.15); color: #2dd4bf;
+            padding: 5px 15px; border-radius: 20px; font-size: 12.5px; font-weight: 700; margin-bottom: 15px;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+        }
+        .footer-team-cards {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px; max-width: 750px; margin: 0 auto 15px auto;
+        }
+        .team-member-card {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 8px 12px; border-radius: 10px; font-size: 13px; color: #e2e8f0; font-weight: 600;
+        }
+        .footer-college { color: #38bdf8; font-weight: 800; font-size: 14.5px; margin: 15px 0 10px 0; }
+        .footer-sep { width: 50%; height: 1px; background: rgba(255, 255, 255, 0.1); margin: 12px auto; }
+        .supervisor-box {
+            display: inline-block; color: #fbbf24; font-weight: bold; background: rgba(251, 191, 36, 0.08);
+            padding: 6px 18px; border-radius: 12px; border: 1px dashed rgba(251, 191, 36, 0.3); font-size: 13.5px;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 تبديل الوضع</button>
+
+    <div class="form-card">
+        <h2>⚡ تقديم بلاغ دعم فني مؤسسي</h2>
+
+        <div class="guide-box">
+            <b>💡 دليل الاستخدام السلس:</b><br>
+            • حدد نوع المسار ثم نوع الجهاز لتظهر لك قائمة المشاكل المرتبطة بدقة.<br>
+            • رقم الجهاز يظهر حصراً عند اختيار (كمبيوتر أو شاشة) مع إدخاله من اليمين لليسار ليعرف المسؤول موقع الجهاز.<br>
+            • يمكنك إرفاق أكثر من صورة معاً لتوضيح حالة البلاغ.
+        </div>
+
+        {% if duplicate_error %}
+            <div class="error-banner">⚠️ {{ duplicate_error }}</div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data" id="reportForm">
+            <div class="form-group">
+                <label>👤 الصفة:</label>
+                <select name="user_type" required>
+                    <option value="متدرب">متدرب</option>
+                    <option value="مدرب">مدرب</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>🏷️ الاسم الثلاثي:</label>
+                <input type="text" name="name" placeholder="أدخل اسمك الثلاثي الكامل" required>
+            </div>
+
+            <div class="form-group">
+                <label>🔢 الرقم التدريبي:</label>
+                <input type="text" name="training_id" dir="ltr" style="text-align: right;" placeholder="مثال: 441012345" required>
+            </div>
+
+            <div class="form-group">
+                <label>🛤️ نوع المسار الفني:</label>
+                <select name="category" id="categorySelect" onchange="updateProblems()" required>
+                    <option value="صيانة الأجهزة">🛠️ صيانة الأجهزة</option>
+                    <option value="فقدان">🔍 فقدان</option>
+                    <option value="تحديث برمجيات ونظام">🔄 تحديث برمجيات ونظام</option>
+                    <option value="شبكات">🌐 شبكات</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>💻 نوع الجهاز:</label>
+                <select name="device" id="deviceSelect" onchange="updateProblems(); checkDeviceFields();" required>
+                    <option value="كمبيوتر">🖥️ كمبيوتر</option>
+                    <option value="الشاشة">📺 الشاشة</option>
+                    <option value="بروجكتور">📽️ بروجكتور</option>
+                    <option value="طابعة">🖨️ طابعة</option>
+                    <option value="أخرى">⚙️ أجهزة ومعدات أخرى</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="otherDeviceBox" style="display: none;">
+                <label>✏️ حدد نوع الجهاز الآخر:</label>
+                <input type="text" name="other_device" placeholder="اكتب اسم الجهاز...">
+            </div>
+
+            <div class="form-group">
+                <label>⚠️ نوع المشكلة:</label>
+                <select name="problem" id="problemSelect" onchange="checkOtherProblem()" required></select>
+            </div>
+
+            <div class="form-group" id="otherProblemBox" style="display: none;">
+                <label>📝 اكتب تفاصيل المشكلة (أخرى):</label>
+                <input type="text" name="other_problem" placeholder="اكتب وصف المشكلة هنا...">
+            </div>
+
+            <div class="form-group">
+                <label>🏢 تفاصيل الموقع الدقيق:</label>
+                <div class="grid-3">
+                    <input type="text" name="building" placeholder="المبنى" required>
+                    <input type="text" name="floor" placeholder="الدور" required>
+                    <input type="text" name="room" placeholder="القاعة / المكتب" required>
+                </div>
+            </div>
+
+            <div class="form-group" id="deviceNumContainer">
+                <label>🏷️ رقم الجهاز (اكتب رقم الجهاز من اليمين لليسار):</label>
+                <input type="text" name="device_number" id="deviceNumberInput" dir="rtl" style="text-align: right;" placeholder="( PC-104 )">
+            </div>
+
+            <div class="form-group">
+                <label>📷 إرفاق صور البلاغ (يمكن اختيار أكثر من صورة معاً):</label>
+                <input type="file" name="images" multiple accept="image/*">
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <span id="btnText">إرسال البلاغ فوراً 🚀</span>
+            </button>
+        </form>
+
+        <p style="text-align: center; margin-top: 25px;">
+            <a href="{{ url_for('index') }}" style="color: var(--text-muted); text-decoration: none; font-weight: bold;">← العودة للرئيسية</a>
+        </p>
+    </div>
+
+    <footer>
+        <div class="footer-badge">✨ فريق العمل الهندسي على المشروع ✨</div>
+        <div class="footer-team-cards">
+            <div class="team-member-card">1- منيب محمد ابوطالب</div>
+            <div class="team-member-card">2- ناصر محمد رفاعي</div>
+            <div class="team-member-card">3- نعيم ماجد غروي</div>
+            <div class="team-member-card">4- سامي علي خلوي</div>
+            <div class="team-member-card">5- يحيى عبدالله سرحاني</div>
+            <div class="team-member-card">6- أحمد علي الاسدي</div>
+        </div>
+        <div class="footer-college">الكلية التقنية بجازان</div>
+        <div class="footer-sep"></div>
+        <div><span class="supervisor-box">إشراف المهندس: أكرم عقيل</span></div>
+    </footer>
+
+    <script>
+        const detailedProblems = {
+            "صيانة الأجهزة": {
+                "كمبيوتر": ["توقف الجهاز عن العمل نهائياً وعدم الاستجابة", "بطء شديد وتجميد مستمر في النظام", "عطل في منافذ التوصيل أو مداخل يو إس بي", "ارتفاع حرارة الجهاز وأصوات مراوح عالية", "شاشة سوداء متكررة عند محاولة التشغيل"],
+                "الشاشة": ["عدم عمل الشاشة نهائياً وانعدام مؤشر الطاقة", "وميض مستمر في الإضاءة الخلفية للشاشة", "ظهور خطوط عمودية أو أفقية ملونة", "تغير الألوان أو بهتان وضوح الرؤية", "تلف في منافذ الإدخال إتش دي إم آي أو في جي أي"],
+                "بروجكتور": ["ضعف شديد في إضاءة العدسة أو انطفاء مفاجئ", "عدم استجابة الجهاز لأوامر التشغيل والتحكم", "ارتفاع درجة الحرارة وظهور تنبيه حراري", "تداخل أو عدم وضوح الصورة المعروضة", "وجود بقع أو نقاط سوداء في الإسقاط الضوئي"],
+                "طابعة": ["حشر الأوراق المتكرر داخل مسار السحب", "عدم سحب الورق من الدرج المخصص", "خروج صفحات فارغة أو بجودة طباعة سيئة", "أعطال ميكانيكية وأصوات احتكاك داخلية", "توقف الاتصال المباشر بين الطابعة والكمبيوتر"],
+                "أخرى": ["عطل تشغيلي عام في القطع المادية للجهاز", "تلف أو كسر في الهيكل الخارجي للمعدة", "عدم استجابة الأزرار أو أدوات التحكم", "مشاكل في التوصيلات الكهربائية الداخلية", "أعطال متفرقة تؤثر على سير العمل"]
+            },
+            "فقدان": {
+                "كمبيوتر": ["فقدان لوحة المفاتيح الملحقة بالجهاز", "فقدان الفأرة المخصصة للعمل على الجهاز", "فقدان كابل الطاقة الموصل للكهرباء", "فقدان كابل الشبكة المتصل بالإنترنت", "فقدان كيسة الكمبيوتر أو جزء رئيسي منها"],
+                "الشاشة": ["فقدان قاعدة تثبيت الشاشة المكتبية", "فقدان كابل توصيل الشاشة بالكمبيوتر", "فقدان محول الطاقة الخارجي للشاشة", "فقدان غطاء حماية الشاشة من الأتربة", "فقدان ملحقات الصوت المدمجة بالشاشة"],
+                "بروجكتور": ["فقدان جهاز التحكم عن بعد الخاص بالبروجكتور", "فقدان حقيبة نقل وحماية جهاز العرض", "فقدان كابل التوصيل السريع بين الأجهزة", "فقدان قطعة العرض اللاسلكية الملحقة", "فقدان غطاء عدسة العرض الواقي"],
+                "طابعة": ["فقدان درج الورق القابل للإزالة", "فقدان كابل التوصيل بمنفذ البيانات", "فقدان غطاء وحدة المسح الضوئي", "فقدان كابل الطاقة الرئيسي للطابعة", "فقدان أدوات ومفتاح صيانة الطابعة"],
+                "أخرى": ["فقدان كلي للجهاز أو المعدة من المعمل", "فقدان محول الطاقة الخاص بالأجهزة المحمولة", "فقدان أدوات الفحص والصيانة الدورية", "فقدان ملحقات الربط والتحكم الأساسية", "فقدان أجزاء قابلة للفصل من المعدات"]
+            },
+            "تحديث برمجيات ونظام": {
+                "كمبيوتر": ["الحاجة إلى ترقية نظام التشغيل لنسخة أحدث", "تثبيت وتحديث حزمة البرامج التدريبية", "تحديث تعريفات كرت الشاشة واللوحة الأم", "إصلاح تعارض البرامج وتوقف التطبيقات", "إعادة تهيئة النظام وتثبيت نسخة نظيفة"],
+                "الشاشة": ["الحاجة إلى تحديث البرنامج الثابت للشاشة", "ضبط تعريفات العرض لتوافق دقة العمل", "حل مشكلة عدم تعرف الكمبيوتر على الشاشة", "تحديث برمجيات التحكم باللمس للشاشات الذكية", "توافق إعدادات التردد مع كرت الشاشة"],
+                "بروجكتور": ["تحديث البرنامج التشغيلي الداخلي للبروجكتور", "ضبط توافق دقة العرض مع أجهزة الإدخال", "تحديث برمجيات الاتصال اللاسلكي والشبكي", "حل مشاكل تأخر استجابة العرض المصدرية", "معايرة الألوان والسطوع برمجياً"],
+                "طابعة": ["تحديث تعريف الطابعة على أجهزة المعمل", "تحديث البرنامج الثابت للتحكم بالطباعة", "حل مشاكل توقف طوابير الطباعة برمجياً", "توافق تعريف الطابعة مع نظام التشغيل", "إعادة ضبط إعدادات الشبكة الداخلية للطابعة"],
+                "أخرى": ["تحديث الرخص البرمجية المنتهية الصلاحية", "تثبيت التحديثات الأمنية وسد الثغرات", "معالجة مشاكل بطء إقلاع الأنظمة البرمجية", "توافق البرمجيات المساعدة مع النظام", "تحديث برمجيات إدارة الأجهزة المركزية"]
+            },
+            "شبكات": {
+                "كمبيوتر": ["انقطاع الاتصال بالشبكة المحلية والإنترنت", "فشل الحصول على عنوان بروتوكول الشبكة", "مشاكل في المصادقة وتسجيل الدخول للنطاق", "بطء شديد في نقل البيانات عبر الشبكة", "عدم التعرف على بطاقة الشبكة السلكية"],
+                "الشاشة": ["تعذر اتصال الشاشة الذكية بالشبكة اللاسلكية", "انقطاع البث الشبكي للشاشات التفاعلية", "عدم ظهور الشاشة ضمن قائمة العرض الشبكي", "تحديث إعدادات الخادم للوصول للشاشة", "مشاكل في بروتوكولات الربط الشبكي"],
+                "بروجكتور": ["فشل عرض المحتوى عبر الشبكة اللاسلكية", "انقطاع الاتصال بخادم البث المركزي للبروجكتور", "تعذر الوصول لإعدادات التحكم عبر الشبكة", "تداخل الإشارات اللاسلكية المؤثرة على العرض", "إعدادات خاطئة لبوابة الشبكة الافتراضية"],
+                "طابعة": ["عدم ظهور الطابعة الشبكية للمستخدمين", "انقطاع اتصال الطابعة بالموجه اللاسلكي", "خطأ في تحديد عنوان المنفذ للطباعة الشبكية", "رفض خادم الطباعة لمعالجة المهام المرسلة", "تغير إعدادات الشبكة الخاصة بالطابعة"],
+                "أخرى": ["ضعف التغطية اللاسلكية داخل منطقة المعمل", "توقف أجهزة توزيع الشبكة الفرعية", "مشاكل في جدار الحماية تمنع الاتصال", "تعطل نقاط الوصول اللاسلكية الرئيسية", "أعطال في تمديدات ومنافذ الشبكة الجدارية"]
+            }
+        };
+
+        function updateProblems() {
+            const cat = document.getElementById("categorySelect").value;
+            const dev = document.getElementById("deviceSelect").value;
+            const probSelect = document.getElementById("problemSelect");
+            probSelect.innerHTML = "";
+            let list = (detailedProblems[cat] && detailedProblems[cat][dev]) ? detailedProblems[cat][dev] : (detailedProblems[cat] ? detailedProblems[cat]["أخرى"] : []);
+            list.forEach(p => {
+                let opt = document.createElement("option"); opt.value = p; opt.textContent = p; probSelect.appendChild(opt);
+            });
+            let otherOpt = document.createElement("option"); otherOpt.value = "أخرى (يرجى التحديد)"; otherOpt.textContent = "⚙️ أخرى (يرجى التحديد كتابةً)"; probSelect.appendChild(otherOpt);
+            checkOtherProblem();
+        }
+
+        function checkDeviceFields() {
+            const dev = document.getElementById("deviceSelect").value;
+            document.getElementById("otherDeviceBox").style.display = (dev === "أخرى") ? "block" : "none";
+            let container = document.getElementById("deviceNumContainer");
+            if (dev === "كمبيوتر" || dev === "الشاشة") {
+                container.style.display = "block";
+            } else {
+                container.style.display = "none";
+                document.getElementById("deviceNumberInput").value = "";
+            }
+        }
+
+        function checkOtherProblem() {
+            const prob = document.getElementById("problemSelect").value;
+            document.getElementById("otherProblemBox").style.display = (prob === "أخرى (يرجى التحديد)") ? "block" : "none";
+        }
+
+        document.getElementById("reportForm").onsubmit = function() {
+            document.getElementById("submitBtn").style.background = "#0f766e";
+            document.getElementById("btnText").innerHTML = "✨ جاري حفظ وإرسال البلاغ...";
+        };
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark-theme')) {
+                html.classList.remove('dark-theme'); html.classList.add('light-theme'); localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.remove('light-theme'); html.classList.add('dark-theme'); localStorage.setItem('theme', 'dark');
+            }
+        }
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.remove('dark-theme'); document.documentElement.classList.add('light-theme');
+        }
+
+        window.onload = function() { updateProblems(); checkDeviceFields(); };
+    </script>
+</body>
+</html>
